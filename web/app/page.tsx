@@ -1,95 +1,122 @@
-import { BrandLink } from "@/components/BrandLink";
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { PageHeading } from "@/components/PageHeading";
-import { SkipLink } from "@/components/SkipLink";
-import { TestnetBanner } from "@/components/TestnetBanner";
+import Journey from "./sponsors/Journey";
+import s from "./sponsors/premiere.module.css";
 
-const DOORS = [
-  {
-    slug: "sponsor",
-    title: "Fund community projects",
-    body: "Fund awards and release approved payments.",
-    icon: (
-      <>
-        <rect x="3" y="7" width="18" height="14" rx="2" />
-        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" />
-      </>
-    ),
-  },
-  {
-    slug: "verifier",
-    title: "Give every submission a careful look",
-    body: "Inspect evidence and record independent decisions.",
-    icon: (
-      <>
-        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
-        <path d="m9 12 2 2 4-4" />
-      </>
-    ),
-  },
-  {
-    slug: "recipient",
-    title: "Know your next step",
-    body: "Submit evidence and follow your own award.",
-    icon: (
-      <>
-        <circle cx="12" cy="8" r="4" />
-        <path d="M5 21a7 7 0 0 1 14 0" />
-      </>
-    ),
-  },
-  {
-    slug: "administrator",
-    title: "Manage project access",
-    body: "Provision members and manage project access.",
-    icon: (
-      <>
-        <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3" />
-        <path d="M2 14h4M10 8h4M18 16h4" />
-      </>
-    ),
-  },
-] as const;
+export const metadata: Metadata = {
+  title: "Fundora | Open. Verify. Transact.",
+  description:
+    "Follow one community workshop stipend from independent human review to sponsor-authorized release on Stellar Testnet.",
+};
 
-export default function EntryPage() {
+export default function HomePage() {
   return (
-    <>
-      <SkipLink />
-      <TestnetBanner />
-      <main className="entry-page" id="main">
-        <div className="entry-masthead">
-          <BrandLink href="/" />
-          <span className="entry-environment">
-            <span className="banner-signal" aria-hidden="true" />
-            Provisioned access only
-          </span>
+    <main className={s.page} id="top">
+      <a className="skip-link" href="#story">
+        Skip to the award story
+      </a>
+      <header className={s.nav}>
+        <Link href="/" aria-label="Fundora home">
+          <Image src="/fundora/wordmark.webp" alt="Fundora" width={126} height={20} />
+        </Link>
+        <nav aria-label="Primary">
+          <a href="#story">The award</a>
+          <a href="#support">Sponsorship</a>
+          <Link href="/enter">Sign in</Link>
+        </nav>
+      </header>
+
+      <section className={s.hero}>
+        <div className={s.heroCopy}>
+          <p className={s.label}>Open. Verify. Transact.</p>
+          <h1>
+            Behind every
+            <br />
+            stipend, <em>a story.</em>
+          </h1>
+          <p>
+            Fundora connects a workshop participant’s completion record to an
+            independent review and a sponsor’s decision to pay.
+          </p>
+          <div className={s.actions}>
+            <a className={s.cta} href="#story">
+              Follow one award <span aria-hidden="true">↓</span>
+            </a>
+            <Link href="/enter">Sign in to a workspace ↗</Link>
+          </div>
         </div>
-        <PageHeading
-          title="Choose your workspace"
-          lead="Each door explains a job. Signing in does not grant that role — only a provisioned membership does. There is no public signup."
+        <div className={s.studio}>
+          <div className={s.plinth}>
+            <Image
+              src="/fundora/identity.webp"
+              width={744}
+              height={502}
+              priority
+              alt="Fundora’s evergreen F and orange release arrow above the official wordmark"
+            />
+          </div>
+        </div>
+      </section>
+
+      <div className={s.strip}>
+        <b>Stellar Testnet</b>
+        <span>Testnet XLM — no real monetary value</span>
+      </div>
+
+      <section className={s.context}>
+        <Image
+          src="/fundora/workshop.webp"
+          width={960}
+          height={640}
+          alt="Illustrative scene of hands working together at a workshop table"
         />
-        <div className="entry-grid">
-          {DOORS.map((door) => (
-            <section key={door.slug} className="workspace-door">
-              <span className="door-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  {door.icon}
-                </svg>
-              </span>
-              <h2>{door.slug[0]!.toUpperCase() + door.slug.slice(1)}</h2>
-              <p className="door-title">{door.title}</p>
-              <p>{door.body}</p>
-              <Link className="button" href={"/login/" + door.slug}>
-                Continue as {door.slug}
-                <span aria-hidden="true">→</span>
-              </Link>
-            </section>
-          ))}
+        <div>
+          <p className={s.label}>Community workshops</p>
+          <h2>
+            Who checked
+            <br />
+            the work?
+          </h2>
+          <p>
+            A payment receipt tells a sponsor where a stipend went. A workshop
+            also needs a record of who completed the training, who checked it,
+            and which evidence supported the decision.
+          </p>
+          <p>
+            Fundora gives each participant a separate award. Their evidence stays
+            private while the approval and transfer can be traced.
+          </p>
         </div>
-        <p className="demo-label">
-          <Link href="/sponsors">Explore Fundora for sponsors →</Link>
+      </section>
+
+      <Journey />
+
+      <section className={s.support} id="support">
+        <p className={s.label}>For prospective sponsors</p>
+        <h2>
+          Help put the next
+          <br />
+          <em>award to the test.</em>
+        </h2>
+        <p>
+          Fundora supports one workshop and up to ten enrolled recipients. Live
+          submission, approval, and payout each need a separate wallet signature.
+          Help evaluate what a workshop organizer and a sponsor need to see at
+          each decision.
         </p>
-      </main>
-    </>
+        <div className={s.actions}>
+          <a className={s.cta} href="/fundora/sponsor-brief.txt" download>
+            Download sponsor brief ↓
+          </a>
+          <Link href="/enter">Sign in ↗</Link>
+        </div>
+      </section>
+
+      <footer className={s.footer}>
+        <span>Fundora · Open. Verify. Transact.</span>
+        <a href="#top">Back to top ↑</a>
+      </footer>
+    </main>
   );
 }

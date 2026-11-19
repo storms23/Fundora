@@ -15,7 +15,7 @@ test("concurrent login failures cannot bypass the throttle with forwarded IP hea
 });
 
 test("role doors, program detail and server authorization", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/enter");
   await expect(page.locator('input[type="password"]')).toHaveCount(0);
   for (const door of ["sponsor", "recipient", "verifier", "administrator"]) {
     await expect(page.locator(`a[href="/login/${door}"]`)).toBeVisible();

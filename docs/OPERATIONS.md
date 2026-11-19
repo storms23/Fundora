@@ -39,7 +39,7 @@ Do **not** create or link an empty Vercel project named `web`. That mis-check fa
 | Workflow | File | When | Jobs |
 |---|---|---|---|
 | **CI** | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) | PR / push to `main` or `dev` | `web` (lint, typecheck, unit tests, build), `contracts` (`cargo test --locked`) |
-| **Preview smoke** | [`.github/workflows/smoke.yml`](../.github/workflows/smoke.yml) | Push to `main`, or manual `workflow_dispatch` | HTTP 200 for `/` and `/sponsors` on the preview URL |
+| **Preview smoke** | [`.github/workflows/smoke.yml`](../.github/workflows/smoke.yml) | Push to `main`, or manual `workflow_dispatch` | HTTP 200 for `/` (Fundora landing) and `/sponsors` (redirects to `/`) |
 
 CI uses FakeRpc-safe stub env only (`STELLAR_ALLOW_SUBMISSION=0`, `STELLAR_USE_FAKE_RPC=1`). It never sets Freighter wallets, service-role production keys, or Mainnet flags. Playwright and Freighter E2E stay out of CI until separately authorized.
 
