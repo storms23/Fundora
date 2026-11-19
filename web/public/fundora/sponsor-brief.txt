@@ -1,0 +1,18 @@
+FUNDORA
+Open. Verify. Transact.
+
+Sponsor discussion brief
+
+Fundora supports conditional stipends for a community training workshop. Each of up to ten enrolled participants has a separate award of 20 Testnet XLM. Testnet XLM has no real monetary value.
+
+The sponsor funds an award with fixed terms. The recipient submits private evidence. An independent verifier checks the organizer's completion record and approves that evidence version. A separate sponsor signature authorizes payment to the enrolled recipient. After expiry, unpaid awards can be recovered by the original sponsor.
+
+Fundora uses Next.js, Supabase, Soroban and Freighter. The hosted preview can run with simulated network operations. Live wallet-backed submission, approval and payout still require operator rehearsal.
+
+Questions for a sponsorship discussion
+Which source record would your workshop use to verify completion?
+Who could independently review it?
+What would you need to see before authorizing a stipend?
+How should a participant follow corrections, holds and deadlines?
+
+The next opportunity is to evaluate the workflow and document the rehearsal with enrolled records.

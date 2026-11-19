@@ -86,6 +86,9 @@ export default function EntryPage() {
             </section>
           ))}
         </div>
+        <p className="demo-label">
+          <Link href="/sponsors">Explore Fundora for sponsors →</Link>
+        </p>
       </main>
     </>
   );
