@@ -51,17 +51,17 @@ export default async function LoginDoorPage({
             <div>
               <Link className="login-mark" href="/" aria-label="Fundora home">
                 <Image
-                  src="/fundora/identity.webp"
+                  src="/fundora/mark-f.png"
                   alt=""
                   width={72}
-                  height={48}
+                  height={60}
                   priority
                 />
               </Link>
               <PageHeading title={meta.label + " sign in"} lead={meta.explain} />
             </div>
             <p className="login-note">
-              Sign in with the account provided by your administrator.
+              Sign in with the account your organizer provisioned for this role.
             </p>
           </section>
           <section className="login-form-panel" aria-label="Sign in">

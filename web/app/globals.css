@@ -1147,12 +1147,15 @@ p.notice {
   align-items: center;
   margin: 0 0 2.1rem;
   text-decoration: none;
+  background: transparent;
 }
 
 .login-mark img {
   width: auto;
-  height: 44px;
+  height: 48px;
   object-fit: contain;
+  background: transparent;
+  border-radius: 0;
 }
 
 .login-card {
