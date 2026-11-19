@@ -1,4 +1,4 @@
-import { BrandLink } from "@/components/BrandLink";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeading } from "@/components/PageHeading";
@@ -46,14 +46,18 @@ export default async function LoginDoorPage({
       <SkipLink />
       <TestnetBanner />
       <main className="login-page" id="main">
-        <Link className="login-back" href="/">
-          ← All workspaces
-        </Link>
         <div className="login-card">
           <section className="login-intro">
             <div>
-              <BrandLink href="/" />
-              <p className="eyebrow">{meta.label} workspace</p>
+              <Link className="login-mark" href="/" aria-label="Fundora home">
+                <Image
+                  src="/fundora/identity.webp"
+                  alt=""
+                  width={72}
+                  height={48}
+                  priority
+                />
+              </Link>
               <PageHeading title={meta.label + " sign in"} lead={meta.explain} />
             </div>
             <p className="login-note">
@@ -61,8 +65,10 @@ export default async function LoginDoorPage({
             </p>
           </section>
           <section className="login-form-panel" aria-label="Sign in">
-            <p className="eyebrow">PROVISIONED ACCOUNT</p>
-            <h2>Account details</h2>
+            <div className="login-form-head">
+              <p className="eyebrow">PROVISIONED ACCOUNT</p>
+              <h2>Account details</h2>
+            </div>
             <LoginForm door={door} />
           </section>
         </div>
