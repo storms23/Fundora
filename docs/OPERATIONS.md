@@ -14,8 +14,8 @@ Status: updated 19 November 2026 after Fundora CI/CD and bounded self-heal. Prev
 
 ## Hosted preview
 
-- URL: https://proofpay-preview.vercel.app
-- Supabase project: `proofpay-preview` (`vttmpwgtnfpowgwdwcwz`)
+- URL: https://fundora-instaward.vercel.app
+- Supabase project: `proofpay-preview` (`vttmpwgtnfpowgwdwcwz`) — project id unchanged; public hostname is Fundora
 - Preview env keeps `STELLAR_USE_FAKE_RPC=1` and `STELLAR_ALLOW_SUBMISSION=0`
 - Free-tier notes: Supabase Free pauses after **7 idle days** and has **no automatic backups**. Dump before risky changes: `npx supabase db dump`.
 - Vercel Hobby is **personal / non-commercial** (POC/MVP only).
@@ -29,7 +29,7 @@ Status: updated 19 November 2026 after Fundora CI/CD and bounded self-heal. Prev
 | Vercel project | **`fundora` only** (`jefferson-tuparans-projects/fundora`) |
 | Root directory | **`web`** (repo root is not the Next app) |
 | Framework | Next.js, Node **22.x** |
-| Production URL | https://proofpay-preview.vercel.app |
+| Production URL | https://fundora-instaward.vercel.app |
 | GitHub repo | `storms23/Fundora` |
 
 Do **not** create or link an empty Vercel project named `web`. That mis-check failed PR #5. If a PR shows a Vercel failure for the wrong project, unlink it and keep only `fundora`.

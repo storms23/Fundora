@@ -23,7 +23,7 @@ jobs:
 
       - name: Smoke home, enter, and sponsors redirect
         env:
-          PREVIEW_BASE: https://proofpay-preview.vercel.app
+          PREVIEW_BASE: https://fundora-instaward.vercel.app
         run: |
           set -euo pipefail
           for path in / /enter /sponsors; do
@@ -42,4 +42,4 @@ jobs:
       - name: On failure — do not auto-revert
         if: failure()
         run: |
-          echo "::warning::Preview smoke failed. Do not force-push. Roll back in Vercel or revert the bad commit on main, then re-check https://proofpay-preview.vercel.app/"
+          echo "::warning::Preview smoke failed. Do not force-push. Roll back in Vercel or revert the bad commit on main, then re-check https://fundora-instaward.vercel.app/"

@@ -8,7 +8,7 @@
 
 **Fundora** helps sponsors fund community projects and release payment after completion is verified. A sponsor funds an award, a recipient submits private evidence, an independent verifier approves it, then the sponsor releases payment on **Stellar** — so money moves with a clear proof trail, not on trust alone.
 
-**Live app:** [proofpay-preview.vercel.app](https://proofpay-preview.vercel.app). Visitors land on the Fundora story first; **Sign in** opens the workspace doors. An administrator provisions accounts and project access.
+**Live app:** [fundora-instaward.vercel.app](https://fundora-instaward.vercel.app). Visitors land on the Fundora story first; **Sign in** opens the workspace doors. An administrator provisions accounts and project access.
 
 ## Contents
 
@@ -113,7 +113,7 @@ docs/brand/   Official Fundora logo
 |---|---|
 | Product path | Next.js + Supabase (`web/`) |
 | Production app | https://fundora-instaward.vercel.app |
-| Preview alias | https://proofpay-preview.vercel.app |
+| Preview alias | https://fundora-instaward.vercel.app |
 | Vercel project | `fundora` |
 | Network | Stellar Testnet |
 | Wallet verification | See the [verification matrix](docs/VERIFICATION.md) and [wallet rehearsal notes](docs/implementation/FREIGHTER_SMOKE_RESUME.md) for tested paths and open checks |
