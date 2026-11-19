@@ -1,0 +1,45 @@
+name: Preview smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  preview-http:
+    name: preview-http
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Wait for Vercel production deploy
+        run: sleep 90
+
+      - name: Smoke home and sponsors
+        env:
+          PREVIEW_BASE: https://proofpay-preview.vercel.app
+        run: |
+          set -euo pipefail
+          for path in / /sponsors; do
+            url="${PREVIEW_BASE}${path}"
+            echo "GET ${url}"
+            code=$(curl -sS -o /tmp/smoke-body -w "%{http_code}" --max-time 30 "$url")
+            echo "status=${code}"
+            if [ "$code" != "200" ]; then
+              echo "::error::Smoke failed for ${url} (HTTP ${code})"
+              head -c 2000 /tmp/smoke-body || true
+              exit 1
+            fi
+          done
+          echo "Smoke passed for / and /sponsors"
+
+      - name: On failure — do not auto-revert
+        if: failure()
+        run: |
+          echo "::warning::Preview smoke failed. Do not force-push. Roll back in Vercel or revert the bad commit on main, then re-check https://proofpay-preview.vercel.app/"

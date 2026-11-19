@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    name: web
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: web
+    env:
+      # FakeRpc-safe stubs for build/test only — never real secrets or submission.
+      NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-anon-key-not-secret
+      SUPABASE_SERVICE_ROLE_KEY: ci-service-role-not-secret
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
+      AUTH_THROTTLE_SECRET: ci-auth-throttle-not-secret
+      CRON_SECRET: ci-cron-not-secret
+      STELLAR_ALLOW_SUBMISSION: "0"
+      STELLAR_USE_FAKE_RPC: "1"
+      STELLAR_RPC_URL: https://soroban-testnet.stellar.org
+      STELLAR_NETWORK_PASSPHRASE: Test SDF Network ; September 2015
+      STELLAR_MAX_FEE: "100000000"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reject committed local secrets
+        working-directory: .
+        run: |
+          if [ -f web/.env.local ] || [ -f .env.local ]; then
+            echo "::error::Committed .env.local is not allowed"
+            exit 1
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  contracts:
+    name: contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: contracts/award -> target
+
+      - name: Award contract tests
+        run: cargo test --manifest-path contracts/award/Cargo.toml --locked
